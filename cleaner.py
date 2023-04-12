@@ -3,6 +3,7 @@ import re
 class Cleaner:
     def __init__(self):
         print(f"Instantiated Cleaner")
+        # https://i.redd.it/gu4n3392l4w61.png
         self.regexes = []
 
         # Remove "04-sabaton-" from "04-sabaton-the_unkillable_soldier.flac"
