@@ -1,6 +1,8 @@
 import os
 import shutil
 
+from pydub import AudioSegment
+
 import cleaner
 
 class Combiner:
@@ -35,5 +37,9 @@ class Combiner:
                     dst_filepath = os.path.join(self.output_dir, split[0] + "_" + str(i) + split[1])
                     i += 1
 
-                # Copy the file to the destination directory
-                shutil.copy2(src_filepath, dst_filepath)
+                if filename.lower().endswith(".flac"):
+                    input_audio = AudioSegment.from_file(src_filepath, format="flac")
+                    input_audio.export(dst_filepath, format="mp3")
+                else:
+                    # Copy the file to the destination directory
+                    shutil.copy2(src_filepath, dst_filepath)

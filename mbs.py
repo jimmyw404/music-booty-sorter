@@ -1,8 +1,8 @@
 import os
 import combiner
 
-src_directory = "H:/m/Rhapsody of Fire/fav_food"
-dst_directory = "H:/m/Rhapsody of Fire/fav"
+src_directory = "H:/m/Powerwolf/test"
+dst_directory = "H:/m/Powerwolf/test_fav"
 
 comb = combiner.Combiner(src_directory, dst_directory)
 comb.combine()

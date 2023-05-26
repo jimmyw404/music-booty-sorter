@@ -27,11 +27,17 @@ class Cleaner:
         # Remove "03 " from "03 Queen Of The Dark Horizons.Mp3"
         self.regexes.append(r'^\d{2}\s')
 
+        # Remove "101-" from "101-Powerwolf-Faster_Than_The_Flame.Flac"
+        self.regexes.append(r'^\d+-')
+
+        # Remove "Powerwolf-" from "101-Powerwolf-Faster_Than_The_Flame.Flac"
+        self.regexes.append(r"^Powerwolf-")
+
     def is_song(self, filename):
-        if filename.endswith(".mp3"):
+        if filename.lower().endswith(".mp3"):
             return True
 
-        if filename.endswith(".flac"):
+        if filename.lower().endswith(".flac"):
             return True
 
         return False
@@ -42,6 +48,14 @@ class Cleaner:
         for regex in self.regexes:
             # Remove the matching pattern from the string
             cleaned = re.sub(regex, '', cleaned)
+
+        # Faster Than The Flame.Flac -> Faster Than The Flame.Flac
+        cleaned = cleaned.replace('_', ' ')
+
+        # Faster Than The Flame.Flac -> Faster Than The Flame.mp3
+        if cleaned.lower().endswith(".flac"):
+            cleaned = cleaned.replace('.flac', '.mp3')
+            cleaned = cleaned.replace('.Flac', '.mp3')
 
         # Capitalize
         cleaned = cleaned.title()
