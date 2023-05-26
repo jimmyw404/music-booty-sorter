@@ -33,6 +33,10 @@ class Cleaner:
         # Remove "Powerwolf-" from "101-Powerwolf-Faster_Than_The_Flame.Flac"
         self.regexes.append(r"^Powerwolf-")
 
+        
+        self.regex_pairs = []
+        self.regex_pairs.append((r'\((.*?)\)',  r'\1'))
+
     def is_song(self, filename):
         if filename.lower().endswith(".mp3"):
             return True
@@ -48,6 +52,10 @@ class Cleaner:
         for regex in self.regexes:
             # Remove the matching pattern from the string
             cleaned = re.sub(regex, '', cleaned)
+
+        for regex_pair in self.regex_pairs:
+            # Remove the matching pattern from the string
+            cleaned = re.sub(regex_pair[0], regex_pair[1], cleaned)
 
         # Faster Than The Flame.Flac -> Faster Than The Flame.Flac
         cleaned = cleaned.replace('_', ' ')
